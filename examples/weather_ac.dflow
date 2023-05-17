@@ -78,6 +78,22 @@ triggers
     "System parameters"
 
   end
+  
+  Intent ask_grades
+    "Grades",
+    "Say grades"
+  end
+
+end
+
+
+eservices
+    EServiceHTTP grades_svc
+        verb: GET
+        host: 'r4a.issel.ee.auth.gr'
+        port: 8080
+        path: '/weather'
+    end
 end
 
 dialogues
@@ -145,6 +161,21 @@ dialogues
         end
   end
 
+  Dialogue ask_grades_dialogue
+      on: ask_grades
+      responses:
+        ActionGroup inform_grades
+          Speak("Retrieving grades for all students")[roles=user_teacher]
+          grades_svc(query=[type=['teacher'], user=USER:NAME],)[roles=user_teacher]
+
+          Speak("Retrieving your grades")[roles=user_student]
+          grades_svc(query=[type=['student'], user=USER:NAME],)[roles=user_student]
+        end
+  end
+
+
+
+
 //  Dialogue template_dialogue
 //      on: Intent
 //      responses:
@@ -162,7 +193,9 @@ access_controls
     user_admin,
     user_paid,
     user,
-    user_unregistered
+    user_unregistered,
+    user_teacher,
+    user_student
 
     default: 
       user_unregistered
