@@ -97,7 +97,8 @@ dialogues
       on: ask_weather
       responses:
         ActionGroup inform_weather
-          Speak("The weather today will be cloudy!")
+          Speak("The weather today will be cloudy!")[roles=user_paid]
+          Speak("This is a paid-only feature")[roles=user]
         end
   end
 
@@ -140,7 +141,7 @@ dialogues
       on: system_parameters
       responses:
         ActionGroup say_system_parameters
-          Speak("System's HostName:" SYSTEM: HOSTNAME "\nSystem's public IP" SYSTEM: PUBLIC_IP)
+          Speak("System's HostName:" SYSTEM: HOSTNAME "\nSystem's public IP" SYSTEM: PUBLIC_IP) //[user_admin, user_unregistered]
         end
   end
 
@@ -169,14 +170,13 @@ access_controls
 
   Users
     user_admin:
-      admin@email.com
+      dcnatsos@ece.auth.gr
 
     user_paid: 
-      user_paid@email.com
+      natdimos@hotmail.com
 
     user:
-      user1@email.com,
-      user2@email.com
+      natsos@aristurtle.gr
   end
 
   Policy inform_weather_policy
@@ -218,7 +218,7 @@ access_controls
   end
 
   Path
-    "/home/user/db/users/user_roles_policies.txt"
+    "/home/dcnatsos/Workspace/dFlow/gen/user_roles_policies.txt"
   end
 
   Authentication
@@ -232,9 +232,9 @@ end
 
 connectors
   Connector slack
-    token: "xoxb-4883692765252-4884029447172-rH1b8v6PMj22OaTsaIQrtpfH"
-    channel: "your_bot"
-    signing_secret: "your_secret"
+    token: "xoxb-4883692765252-4884029447172-ugTQKUFpaYFxbCPltU577xjJ"
+    channel: "bot"
+    signing_secret: "65140e237b845fe11c576e31e99564b6"
   end
 
 //  Connector telegram
