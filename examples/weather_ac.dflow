@@ -189,13 +189,12 @@ dialogues
 end
 
 access_controls
+
   Roles
     user_admin,
     user_paid,
     user,
     user_unregistered,
-    user_teacher,
-    user_student
 
     default: 
       user_unregistered
@@ -203,13 +202,15 @@ access_controls
 
   Users
     user_admin:
-      dcnatsos@ece.auth.gr
+      user_admin@email.com
 
     user_paid: 
-      natdimos@hotmail.com
+      user_paid1@email.com
+      user_paid2@email.com
 
     user:
-      natsos@aristurtle.gr
+      user1@email.com
+      user2@email.com
   end
 
   Policy inform_weather_policy
@@ -251,16 +252,18 @@ access_controls
   end
 
   Path
-    "/home/dcnatsos/Workspace/dFlow/gen/user_roles_policies.txt"
+    "/path/to/user_roles_policies.txt"
   end
 
   Authentication
-    //method: slot
-    //slot_name: name_slot
+    method: slot
+    slot_name: name_slot
     
     method: slack
-    //attribute: email -> Feature for later
+    attribute: email
   end
+
+
 end
 
 connectors
@@ -270,9 +273,9 @@ connectors
     signing_secret: "65140e237b845fe11c576e31e99564b6"
   end
 
-//  Connector telegram
-//    token: "490161424:AAGlRxinBRtKGb21_rlOEMtDFZMXBl6EC0o"
-//    verify: "your_bot"
-//    webhook_url: "https://your_url.com/webhooks/telegram/webhook"
-//  end
+  Connector telegram
+    token: "490161424:AAGlRxinBRtKGb21_rlOEMtDFZMXBl6EC0o"
+    verify: "your_bot"
+    webhook_url: "https://your_url.com/webhooks/telegram/webhook"
+  end
 end
